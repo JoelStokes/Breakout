@@ -144,7 +144,7 @@ GameObject:
   - component: {fileID: 6249886900943912899}
   m_Layer: 0
   m_Name: Saucer
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -234,6 +234,7 @@ MonoBehaviour:
   ArrowObj: {fileID: 799428377}
   BallObj: {fileID: 6249886899662046927}
   projectilePrefab: {fileID: 2987964801955786338, guid: dfb00d250d4387b488ad3f0ece991821, type: 3}
+  BulletMeterObj: {fileID: 0}
 --- !u!60 &6249886900943912899
 PolygonCollider2D:
   m_ObjectHideFlags: 0
@@ -289,6 +290,18 @@ PrefabInstance:
     - target: {fileID: 7576147605427340177, guid: d8f97e8e500c3764aaecfc126b74cc2b, type: 3}
       propertyPath: m_Name
       value: Ball
+      objectReference: {fileID: 0}
+    - target: {fileID: 7576147605427340177, guid: d8f97e8e500c3764aaecfc126b74cc2b, type: 3}
+      propertyPath: m_TagString
+      value: Ball
+      objectReference: {fileID: 0}
+    - target: {fileID: 7576147605427340178, guid: d8f97e8e500c3764aaecfc126b74cc2b, type: 3}
+      propertyPath: speed
+      value: 35
+      objectReference: {fileID: 0}
+    - target: {fileID: 7576147605427340179, guid: d8f97e8e500c3764aaecfc126b74cc2b, type: 3}
+      propertyPath: m_Radius
+      value: 0.05
       objectReference: {fileID: 0}
     - target: {fileID: 7576147605427340188, guid: d8f97e8e500c3764aaecfc126b74cc2b, type: 3}
       propertyPath: m_RootOrder

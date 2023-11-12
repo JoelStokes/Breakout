@@ -21,12 +21,24 @@ public class Player : MonoBehaviour
 
     private float deathHeight = -5f;
 
+    //UI
+    public GameObject BulletMeterObj;
+    private SpriteRenderer bulletMeterRenderer;
+    private float meterMax;
+
+    void Start(){
+        meterMax = BulletMeterObj.transform.localScale.y;
+        bulletMeterRenderer = BulletMeterObj.GetComponent<SpriteRenderer>();
+        HandleMeter();
+    }
+
     void Update()
     {
         if (!ballAttached){ //Don't gain bullet energy until ball fired
             if (bulletTimer < bulletLim){
                 bulletTimer += Time.deltaTime;
-            }            
+                HandleMeter();
+            }       
         }
 
         if (BallObj.transform.position.y < deathHeight){
@@ -62,5 +74,15 @@ public class Player : MonoBehaviour
 
     private void Die(){
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+    }
+
+    private void HandleMeter(){
+        BulletMeterObj.transform.localScale = new Vector3(BulletMeterObj.transform.localScale.x, (bulletTimer / bulletLim) * meterMax, BulletMeterObj.transform.localScale.z);
+
+        if (bulletTimer >= bulletLim){
+            bulletMeterRenderer.color = Color.blue;
+        } else {
+            bulletMeterRenderer.color = Color.red;
+        }
     }
 }

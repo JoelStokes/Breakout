@@ -15,8 +15,12 @@ public class Bullet : MonoBehaviour
         }
     }
 
-    void OnCollisionEnter2D(Collision2D other)
-    {
-        //Handle block hit / bullet destroy!
+    private void OnTriggerEnter2D(Collider2D other) {
+        if (other.transform.tag == "Block"){
+            other.gameObject.GetComponent<Block>().Hit();
+            Destroy(gameObject);
+        } else if (other.transform.tag != "Player" && other.transform.tag != "Ball"){
+            Destroy(gameObject);
+        }
     }
 }
