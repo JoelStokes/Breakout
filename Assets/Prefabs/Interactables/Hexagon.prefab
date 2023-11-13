@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 6022925671040519278}
   - component: {fileID: 6022925671040519279}
   - component: {fileID: 6022925671040519272}
+  - component: {fileID: 297702880250156955}
   m_Layer: 0
   m_Name: Hexagon
   m_TagString: Block
@@ -104,6 +105,7 @@ MonoBehaviour:
   colors:
   - {r: 1, g: 0.31764707, b: 0.31764707, a: 1}
   - {r: 0.735849, g: 0.03818085, b: 0.7317781, a: 1}
+  particleSystem: {fileID: 7708289386732128369, guid: fa1b944026d035b4f8e9c4d2802a0cc9, type: 3}
 --- !u!60 &6022925671040519272
 PolygonCollider2D:
   m_ObjectHideFlags: 0
@@ -135,3 +137,17 @@ PolygonCollider2D:
       - {x: -0.0011655204, y: -0.358624}
       - {x: 0.30808213, y: -0.17531623}
       - {x: 0.30883038, y: 0.17985491}
+--- !u!114 &297702880250156955
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6022925671040519276}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e98dc97db1f855e429af2b4b057fbe15, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ShadowOffset: {x: 0.05, y: -0.05}
+  ShadowMaterial: {fileID: 2100000, guid: 1667686b60b181f43bc56e1a9741b7dc, type: 2}

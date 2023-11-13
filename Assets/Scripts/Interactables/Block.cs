@@ -8,6 +8,7 @@ public class Block : MonoBehaviour
     public int points;
     public GameObject[] drops;
     public Color[] colors;
+    public ParticleSystem particleSystem;
 
     private SpriteRenderer spriteRenderer;
 
@@ -39,6 +40,7 @@ public class Block : MonoBehaviour
                     Destroy(gameObject.transform.GetChild(i).gameObject);
                 }
 
+                Instantiate(particleSystem, transform.position, Quaternion.identity);
                 Destroy(gameObject);
             }
         }

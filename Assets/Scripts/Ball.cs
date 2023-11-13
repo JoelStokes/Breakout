@@ -7,7 +7,7 @@ public class Ball : MonoBehaviour
 {
     public float speed;
     private Rigidbody2D rb;
-    private Vector3 lastVelocity;
+    //private Vector3 lastVelocity;
 
     private bool launched = false;
 
@@ -17,7 +17,6 @@ public class Ball : MonoBehaviour
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
-        lastVelocity = Vector3.up;
     }
 
     private void Update(){
@@ -26,25 +25,27 @@ public class Ball : MonoBehaviour
         }       
     }
 
-    private void FixedUpdate() {
-        if (launched)
-            rb.velocity = lastVelocity * speed * Random.Range(0.1f, 0.2f);  //Random added to prevent ball stuck in perfect corners
-    }
-
     public void Launch(Transform launchTransform){
-        lastVelocity = launchTransform.up;
+        rb.AddForce(launchTransform.up * speed);
         launched = true;
     }
 
     void OnCollisionEnter2D(Collision2D other)
     {
-        var newSpeed = lastVelocity.magnitude;
-        var direction = Vector3.Reflect(lastVelocity.normalized, other.contacts[0].normal);
-
-        lastVelocity = direction * Mathf.Max(newSpeed, 0f);
-
         if (other.transform.tag == "Block"){
             other.gameObject.GetComponent<Block>().Hit();
+        } else if (other.transform.tag == "Player"){
+            Vector3 hitPoint = other.contacts[0].point;
+            Vector3 paddleCenter = new Vector3(other.gameObject.transform.position.x, other.gameObject.transform.position.y);
+
+            rb.velocity = Vector2.zero;
+
+            float difference = paddleCenter.x - hitPoint.x;
+            if (hitPoint.x < paddleCenter.x){
+                rb.AddForce(new Vector2(-(Mathf.Abs(difference * 350)), speed));
+            } else {
+                rb.AddForce(new Vector2((Mathf.Abs(difference * 350)), speed));
+            }
         }
     }
 
