@@ -5,6 +5,7 @@ using UnityEngine;
 public class Bullet : MonoBehaviour
 {
     public float speed;
+    public ParticleSystem particleSystem;
 
     void Update()
     {
@@ -16,10 +17,13 @@ public class Bullet : MonoBehaviour
     }
 
     private void OnTriggerEnter2D(Collider2D other) {
-        if (other.transform.tag == "Block"){
-            other.gameObject.GetComponent<Block>().Hit();
-            Destroy(gameObject);
-        } else if (other.transform.tag != "Player" && other.transform.tag != "Ball"){
+        if (other.transform.tag != "Player" && other.transform.tag != "Ball"){
+            if (other.transform.tag == "Block"){
+                other.gameObject.GetComponent<Block>().Hit();
+            } else if (other.transform.tag == "Switch"){
+                other.gameObject.GetComponent<Switch>().ToggleSwitch();
+            }
+            Instantiate(particleSystem, other.ClosestPoint(transform.position), Quaternion.identity);
             Destroy(gameObject);
         }
     }

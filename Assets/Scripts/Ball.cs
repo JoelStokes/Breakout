@@ -53,6 +53,8 @@ public class Ball : MonoBehaviour
         if (other.transform.tag == "Warp" && warpTimer >= warpLim){
             warpTimer = 0;
             transform.position = other.gameObject.GetComponent<Warp>().destination;
+        } else if (other.transform.tag == "Switch"){
+            other.gameObject.GetComponent<Switch>().ToggleSwitch();
         }
     }
 

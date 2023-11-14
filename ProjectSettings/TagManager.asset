@@ -7,6 +7,7 @@ TagManager:
   - Block
   - Warp
   - Ball
+  - Switch
   layers:
   - Default
   - TransparentFX
@@ -46,6 +47,9 @@ TagManager:
     locked: 0
   - name: Default
     uniqueID: 0
+    locked: 0
+  - name: Sprite
+    uniqueID: 974418727
     locked: 0
   - name: UI
     uniqueID: 3361115581

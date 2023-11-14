@@ -4,6 +4,7 @@ using Unity.Mathematics;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.InputSystem;
 
 public class Player : MonoBehaviour
 {
@@ -18,6 +19,7 @@ public class Player : MonoBehaviour
     private float bulletTimer = 0;
     private float bulletLim = 2;
     private bool ballAttached = true;
+    private float currentMove = 0;
 
     private float deathHeight = -5f;
 
@@ -45,25 +47,7 @@ public class Player : MonoBehaviour
             Die();
         }
 
-        //CHANGE FOR PROPER INPUT SYSTEM FOR CONTROLLER & KEYBOARD LATER!
-        if (Input.GetKey(KeyCode.LeftArrow) || Input.GetKeyDown(KeyCode.A)){
-            transform.position = new Vector3(transform.position.x - (moveSpeed * Time.deltaTime), transform.position.y, transform.position.z);
-        } else if (Input.GetKey(KeyCode.RightArrow) || Input.GetKeyDown(KeyCode.D)){
-            transform.position = new Vector3(transform.position.x + (moveSpeed * Time.deltaTime), transform.position.y, transform.position.z);
-        }
-
-        if (Input.GetKey(KeyCode.Space)){
-            if (ballAttached){
-                BallObj.GetComponent<Ball>().Launch(ArrowObj.transform);
-                BallObj.GetComponent<TrailRenderer>().emitting = true;
-                BallObj.transform.parent = null;
-                ArrowObj.SetActive(false);
-                ballAttached = false;
-            } else if (bulletTimer >= bulletLim){
-                Instantiate(projectilePrefab, transform.position, quaternion.identity);
-                bulletTimer = 0;
-            }
-        } 
+        transform.position = new Vector3(transform.position.x + (moveSpeed * Time.deltaTime * currentMove), transform.position.y, transform.position.z);
 
         if (transform.position.x < leftLim){
             transform.position = new Vector3(rightLim, transform.position.y, transform.position.z);
@@ -83,6 +67,25 @@ public class Player : MonoBehaviour
             bulletMeterRenderer.color = Color.blue;
         } else {
             bulletMeterRenderer.color = Color.red;
+        }
+    }
+
+    public void Move(InputAction.CallbackContext context){  //Set facing direction along with applying move
+        currentMove = context.ReadValue<float>();
+    }
+
+    public void Launch(InputAction.CallbackContext context){
+        if (context.phase == InputActionPhase.Started){
+            if (ballAttached){
+                BallObj.GetComponent<Ball>().Launch(ArrowObj.transform);
+                BallObj.GetComponent<TrailRenderer>().emitting = true;
+                BallObj.transform.parent = null;
+                ArrowObj.SetActive(false);
+                ballAttached = false;
+            } else if (bulletTimer >= bulletLim){
+                Instantiate(projectilePrefab, transform.position, quaternion.identity);
+                bulletTimer = 0;
+            }
         }
     }
 }
