@@ -8,6 +8,8 @@ TagManager:
   - Warp
   - Ball
   - Switch
+  - Enemy
+  - Powerup
   layers:
   - Default
   - TransparentFX

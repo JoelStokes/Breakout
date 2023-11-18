@@ -13,16 +13,24 @@ public class Ball : MonoBehaviour
 
     private float warpTimer = 0;
     private float warpLim = .25f;
+    private float deathHeight = -5f;
+
+    private LevelManager levelManager;
 
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
+        levelManager = GameObject.Find("LevelManager").GetComponent<LevelManager>();
     }
 
     private void Update(){
         if (warpTimer < warpLim){
             warpTimer += Time.deltaTime;
-        }       
+        }
+
+        if (transform.position.y < deathHeight){
+            levelManager.DestroyBall(gameObject);
+        }
     }
 
     public void Launch(Transform launchTransform){
@@ -33,7 +41,11 @@ public class Ball : MonoBehaviour
     void OnCollisionEnter2D(Collision2D other)
     {
         if (other.transform.tag == "Block"){
-            other.gameObject.GetComponent<Block>().Hit();
+            Block newBlock = other.gameObject.GetComponent<Block>();
+            newBlock.Hit();
+        } else if (other.transform.tag == "Enemy"){
+            BasicEnemy newEnemy = other.gameObject.GetComponent<BasicEnemy>();
+            newEnemy.Hit();
         } else if (other.transform.tag == "Player"){
             Vector3 hitPoint = other.contacts[0].point;
             Vector3 paddleCenter = new Vector3(other.gameObject.transform.position.x, other.gameObject.transform.position.y);

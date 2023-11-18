@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using Unity.Mathematics;
 using Unity.VisualScripting;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 using UnityEngine.InputSystem;
 
 public class Player : MonoBehaviour
@@ -21,7 +20,9 @@ public class Player : MonoBehaviour
     private bool ballAttached = true;
     private float currentMove = 0;
 
-    private float deathHeight = -5f;
+    //Power-Up Variables
+    private float powerUpTimer = 0;
+    private float powerUpLim = 10;
 
     //UI
     public GameObject BulletMeterObj;
@@ -43,10 +44,6 @@ public class Player : MonoBehaviour
             }       
         }
 
-        if (BallObj.transform.position.y < deathHeight){
-            Die();
-        }
-
         transform.position = new Vector3(transform.position.x + (moveSpeed * Time.deltaTime * currentMove), transform.position.y, transform.position.z);
 
         if (transform.position.x < leftLim){
@@ -56,8 +53,12 @@ public class Player : MonoBehaviour
         }
     }
 
+    private void Damage(){
+        //This will be set up once the gameManager & health systems are in place. Take damage from last ball falling or hit by "hurt" object
+    }
+
     private void Die(){
-        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+        //No more health
     }
 
     private void HandleMeter(){
@@ -68,6 +69,10 @@ public class Player : MonoBehaviour
         } else {
             bulletMeterRenderer.color = Color.red;
         }
+    }
+
+    public void ApplyStats(){
+        //Apply purchased stats, such as size, move speed, battery, to player from Level Manager saved data
     }
 
     public void Move(InputAction.CallbackContext context){  //Set facing direction along with applying move
@@ -86,6 +91,45 @@ public class Player : MonoBehaviour
                 Instantiate(projectilePrefab, transform.position, quaternion.identity);
                 bulletTimer = 0;
             }
+        }
+    }
+
+    void OnTriggerEnter2D(Collider2D other){
+        if (other.gameObject.tag == "Hurt"){
+            Damage();
+            Destroy(other.gameObject);
+        } else if (other.gameObject.tag == "Powerup"){
+            string value = other.gameObject.GetComponent<Powerup>().power;
+            switch (value){
+                case "grow":
+                    //Increase scale of player, add timer
+                    break;
+                case "shrink":
+                    //Shrink scale of player, add timer
+                    break;
+                case "multiball":
+                    //call GameManager to split existing balls & add split force
+                    break;
+                case "tripleball":
+                    //above
+                    break;
+                case "battery":
+                    bulletLim = bulletLim/2;    //Should this be redone with a timer?
+                    break;
+                case "lowBattery":
+                    //increase fire charge time, add timer
+                    break;
+                case "bullet":
+                    //add an extra bullet per shot
+                    break;
+                case "homing":
+                    //make bullets auto track towards remaining block or enemy
+                    break;
+                default:
+                    Debug.Log("ERROR! Invalid powerup name for " + value);
+                    break;
+            }
+            Destroy(other.gameObject);
         }
     }
 }

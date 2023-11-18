@@ -2,24 +2,23 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Block : MonoBehaviour
+public class BasicEnemy : MonoBehaviour
 {
     public int health;
     public int points;
     public GameObject[] drops;
-    public Color[] colors;
     public ParticleSystem particles;
-
-    private SpriteRenderer spriteRenderer;
-
+    
     private float hitTimer = 0;
     private float hitLim = .05f;
 
-    private void Start(){
-        spriteRenderer = GetComponent<SpriteRenderer>();
+    void Start()
+    {
+        
     }
 
-    private void Update(){
+    void Update()
+    {
         if (hitTimer < hitLim){
             hitTimer += Time.deltaTime;
         }
@@ -31,7 +30,7 @@ public class Block : MonoBehaviour
             hitTimer = 0;
 
             if (health > 0){
-                spriteRenderer.color = colors[health-1];  //To be replaced with an array of sprites that show damage?
+                //Play animation of enemy hurt?
             } else {
                 //ADD INFO HERE FOR DROPPING LOOT / POWERUPS!
                 GameObject.Find("LevelManager").GetComponent<LevelManager>().SubtractObject(true, points);
