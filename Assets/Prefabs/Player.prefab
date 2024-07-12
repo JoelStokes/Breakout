@@ -237,6 +237,7 @@ MonoBehaviour:
   ArrowObj: {fileID: 799428377}
   BallObj: {fileID: 6249886899662046927}
   projectilePrefab: {fileID: 2987964801955786338, guid: dfb00d250d4387b488ad3f0ece991821, type: 3}
+  collectParticles: {fileID: 5458294602221380628, guid: a4c81758fea382d47878ea55c258406e, type: 3}
   BulletMeterObj: {fileID: 0}
 --- !u!60 &6249886900943912899
 PolygonCollider2D:

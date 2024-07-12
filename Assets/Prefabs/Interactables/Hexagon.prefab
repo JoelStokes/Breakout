@@ -105,7 +105,7 @@ MonoBehaviour:
   colors:
   - {r: 1, g: 0.31764707, b: 0.31764707, a: 1}
   - {r: 0.735849, g: 0.03818085, b: 0.7317781, a: 1}
-  particleSystem: {fileID: 7708289386732128369, guid: fa1b944026d035b4f8e9c4d2802a0cc9, type: 3}
+  particles: {fileID: 7708289386732128369, guid: fa1b944026d035b4f8e9c4d2802a0cc9, type: 3}
 --- !u!60 &6022925671040519272
 PolygonCollider2D:
   m_ObjectHideFlags: 0
@@ -151,3 +151,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ShadowOffset: {x: 0.05, y: -0.05}
   ShadowMaterial: {fileID: 2100000, guid: 1667686b60b181f43bc56e1a9741b7dc, type: 2}
+  parentlessRotation: 0
+  parentlessPosition: 0

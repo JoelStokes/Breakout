@@ -6,7 +6,8 @@ public class Block : MonoBehaviour
 {
     public int health;
     public int points;
-    public GameObject[] drops;
+    public GameObject[] Drops;
+    public float[] dropPercents;
     public Color[] colors;
     public ParticleSystem particles;
 
@@ -33,7 +34,6 @@ public class Block : MonoBehaviour
             if (health > 0){
                 spriteRenderer.color = colors[health-1];  //To be replaced with an array of sprites that show damage?
             } else {
-                //ADD INFO HERE FOR DROPPING LOOT / POWERUPS!
                 GameObject.Find("LevelManager").GetComponent<LevelManager>().SubtractObject(true, points);
 
                 for (var i = gameObject.transform.childCount - 1; i >= 0; i--)
@@ -42,8 +42,17 @@ public class Block : MonoBehaviour
                 }
 
                 Instantiate(particles, transform.position, Quaternion.identity);
+                DetermineDrop();
+                
                 Destroy(gameObject);
             }
         }
+    }
+
+    private void DetermineDrop(){
+        Random.Range(0, 100);
+
+        //Add drop rate increase each time no power-up drops to help prevent long droughts
+        //if ()
     }
 }

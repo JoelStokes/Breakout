@@ -5,7 +5,7 @@ using UnityEngine;
 public class Bullet : MonoBehaviour
 {
     public float speed;
-    public ParticleSystem particleSystem;
+    public ParticleSystem particles;
 
     void Update()
     {
@@ -23,7 +23,7 @@ public class Bullet : MonoBehaviour
             } else if (other.transform.tag == "Switch"){
                 other.gameObject.GetComponent<Switch>().ToggleSwitch();
             }
-            Instantiate(particleSystem, other.ClosestPoint(transform.position), Quaternion.identity);
+            Instantiate(particles, other.ClosestPoint(transform.position), Quaternion.identity);
             Destroy(gameObject);
         }
     }

@@ -11,6 +11,7 @@ public class Player : MonoBehaviour
     public GameObject ArrowObj;
     public GameObject BallObj;
     public GameObject projectilePrefab;
+    public ParticleSystem collectParticles;
 
     private float leftLim = -7.8f;
     private float rightLim = 7.8f;
@@ -29,10 +30,14 @@ public class Player : MonoBehaviour
     private SpriteRenderer bulletMeterRenderer;
     private float meterMax;
 
+    private LevelManager levelManager;
+
     void Start(){
         meterMax = BulletMeterObj.transform.localScale.y;
         bulletMeterRenderer = BulletMeterObj.GetComponent<SpriteRenderer>();
         HandleMeter();
+
+        levelManager = GameObject.Find("LevelManager").GetComponent<LevelManager>();
     }
 
     void Update()
@@ -99,31 +104,66 @@ public class Player : MonoBehaviour
             Damage();
             Destroy(other.gameObject);
         } else if (other.gameObject.tag == "Powerup"){
+            Instantiate(collectParticles, other.ClosestPoint(transform.position), Quaternion.identity);
+
             string value = other.gameObject.GetComponent<Powerup>().power;
             switch (value){
-                case "grow":
-                    //Increase scale of player, add timer
+                case "PlayerGrow":
+                    transform.localScale = new Vector3(transform.localScale.x * 1.25f, transform.localScale.y * 1.1f, transform.localScale.z);
                     break;
-                case "shrink":
-                    //Shrink scale of player, add timer
+                case "PlayerShrink":
+                    transform.localScale = new Vector3(transform.localScale.x * .75f, transform.localScale.y * .9f, transform.localScale.z);
                     break;
-                case "multiball":
-                    //call GameManager to split existing balls & add split force
+                case "BallGrow":
+                    //Ball doubles in size, timer
                     break;
-                case "tripleball":
-                    //above
+                case "BallShrink":
+                    //Ball halves in size, timer
                     break;
-                case "battery":
+                case "Multiball":
+                    levelManager.AddBalls(false);
+                    break;
+                case "Tripleball":
+                    levelManager.AddBalls(true);
+                    break;
+                case "Battery":
                     bulletLim = bulletLim/2;    //Should this be redone with a timer?
                     break;
-                case "lowBattery":
-                    //increase fire charge time, add timer
+                case "LowBattery":
+                    bulletLim = bulletLim*2;
                     break;
-                case "bullet":
+                case "Bullet":
                     //add an extra bullet per shot
                     break;
-                case "homing":
+                case "Homing":
                     //make bullets auto track towards remaining block or enemy
+                    break;
+                case "Magnet":
+                    //Ball sticks to saucer to allow reshoot arrow
+                    break;
+                case "PlayerFast":
+                    //Player moves faster, timer
+                    break;
+                case "PlayerSlow":
+                    //Player moves slower, timer
+                    break;
+                case "BallFast":
+                    //Ball moves faster, timer
+                    break;
+                case "BallSlow":
+                    //Ball moves slower, timer
+                    break;
+                case "FireBall":
+                    //Set ball on fire, allows breaking through flammable obstacles
+                    break;
+                case "FireShot":
+                    //Set ball on fire, allows breaking through flammable obstacles
+                    break;
+                case "MetalBall":
+                    //Set ball metal, breaks through metal surfaces & obstacles
+                    break;
+                case "MetalShot":
+                    //Set shot metal
                     break;
                 default:
                     Debug.Log("ERROR! Invalid powerup name for " + value);

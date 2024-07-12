@@ -216,7 +216,7 @@ MonoBehaviour:
   drops: []
   colors:
   - {r: 1, g: 0.3176471, b: 0.3176471, a: 1}
-  particleSystem: {fileID: 7708289386732128369, guid: fa1b944026d035b4f8e9c4d2802a0cc9, type: 3}
+  particles: {fileID: 7708289386732128369, guid: fa1b944026d035b4f8e9c4d2802a0cc9, type: 3}
 --- !u!61 &6151443257036522429
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -257,3 +257,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ShadowOffset: {x: 0.05, y: -0.05}
   ShadowMaterial: {fileID: 2100000, guid: 1667686b60b181f43bc56e1a9741b7dc, type: 2}
+  parentlessRotation: 0
+  parentlessPosition: 0

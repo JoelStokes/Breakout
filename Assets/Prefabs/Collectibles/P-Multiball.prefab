@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &5513284146077336160
+--- !u!1 &7597744285336653477
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8,26 +8,27 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 6639498787117260621}
-  - component: {fileID: 8097599343931180893}
-  - component: {fileID: 5832993097407496582}
-  - component: {fileID: 5832993097407496583}
-  - component: {fileID: 5832993097407496585}
-  - component: {fileID: 5832993097407496584}
+  - component: {fileID: 8779695369677673352}
+  - component: {fileID: 6166537466375375768}
+  - component: {fileID: 8431150567660899651}
+  - component: {fileID: 8431150567660899650}
+  - component: {fileID: 8431150567660899660}
+  - component: {fileID: 8431150567660899661}
+  - component: {fileID: 8779695369677673355}
   m_Layer: 0
-  m_Name: P-Battery
+  m_Name: P-Multiball
   m_TagString: Powerup
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &6639498787117260621
+--- !u!4 &8779695369677673352
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5513284146077336160}
+  m_GameObject: {fileID: 7597744285336653477}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1.2, y: 1.2, z: 1}
@@ -36,13 +37,13 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!212 &8097599343931180893
+--- !u!212 &6166537466375375768
 SpriteRenderer:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5513284146077336160}
+  m_GameObject: {fileID: 7597744285336653477}
   m_Enabled: 1
   m_CastShadows: 0
   m_ReceiveShadows: 0
@@ -77,7 +78,7 @@ SpriteRenderer:
   m_SortingLayerID: 974418727
   m_SortingLayer: 1
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: a6c36158df80c504780acd58cc52549a, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 6939a2899792ef64f857289cf1842e10, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -88,27 +89,27 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &5832993097407496582
+--- !u!114 &8431150567660899651
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5513284146077336160}
+  m_GameObject: {fileID: 7597744285336653477}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 80c833b104766e745a76fa62cfc9544b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  power: Battery
+  power: Multiball
   fallSpeed: 1.5
---- !u!61 &5832993097407496583
+--- !u!61 &8431150567660899650
 BoxCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5513284146077336160}
+  m_GameObject: {fileID: 7597744285336653477}
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
@@ -128,13 +129,13 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.2, y: 0.25}
   m_EdgeRadius: 0
---- !u!198 &5832993097407496585
+--- !u!198 &8431150567660899660
 ParticleSystem:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5513284146077336160}
+  m_GameObject: {fileID: 7597744285336653477}
   serializedVersion: 8
   lengthInSec: 5
   simulationSpeed: 1
@@ -1392,7 +1393,7 @@ ParticleSystem:
         m_RotationOrder: 4
     separateAxes: 0
   ColorModule:
-    enabled: 1
+    enabled: 0
     gradient:
       serializedVersion: 2
       minMaxState: 1
@@ -4835,14 +4836,14 @@ ParticleSystem:
         m_PostInfinity: 2
         m_RotationOrder: 4
     vectorLabel1_3: W
---- !u!199 &5832993097407496584
+--- !u!199 &8431150567660899661
 ParticleSystemRenderer:
   serializedVersion: 6
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5513284146077336160}
+  m_GameObject: {fileID: 7597744285336653477}
   m_Enabled: 1
   m_CastShadows: 0
   m_ReceiveShadows: 0
@@ -4907,3 +4908,19 @@ ParticleSystemRenderer:
   m_MeshWeighting2: 1
   m_MeshWeighting3: 1
   m_MaskInteraction: 0
+--- !u!114 &8779695369677673355
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7597744285336653477}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e98dc97db1f855e429af2b4b057fbe15, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ShadowOffset: {x: 0.05, y: -0.05}
+  ShadowMaterial: {fileID: 2100000, guid: 1667686b60b181f43bc56e1a9741b7dc, type: 2}
+  parentlessRotation: 0
+  parentlessPosition: 0

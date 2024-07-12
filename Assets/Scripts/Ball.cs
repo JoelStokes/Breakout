@@ -14,10 +14,11 @@ public class Ball : MonoBehaviour
     private float warpTimer = 0;
     private float warpLim = .25f;
     private float deathHeight = -5f;
+    private float speedIncrease = .05f;
 
     private LevelManager levelManager;
 
-    void Start()
+    void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
         levelManager = GameObject.Find("LevelManager").GetComponent<LevelManager>();

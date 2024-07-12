@@ -53,17 +53,34 @@ public class LevelManager : MonoBehaviour
 
     public void AddBalls(bool triple){
         for (int i=0; i<Balls.Count; i++){
-            CreateBall(i, Balls[i].transform);
+            CreateBall(i, Balls[i].transform, false);
             if (triple){
-                CreateBall(i, Balls[i].transform);
+                CreateBall(i, Balls[i].transform, true);
             }
         }
     }
 
-    private void CreateBall(int i, Transform newTransform){ //May need to switch to object pooling method for performance improvement
+    private void CreateBall(int i, Transform newTransform, bool triple){ //May need to switch to object pooling method for performance improvement
+        Debug.Log("Transform in LevelManager: " + newTransform);
         GameObject Clone;
-        Clone = GameObject.Instantiate(Balls[i], Balls[i].transform.position, Quaternion.identity);
+        if (!triple){
+            Clone = GameObject.Instantiate(Balls[i], new Vector3(Balls[i].transform.position.x+.01f, Balls[i].transform.position.y+.01f, Balls[i].transform.position.z), Quaternion.identity);
+        } else {
+            Clone = GameObject.Instantiate(Balls[i], new Vector3(Balls[i].transform.position.x-.01f, Balls[i].transform.position.y-.01f, Balls[i].transform.position.z), Quaternion.identity);
+        }
         Clone.GetComponent<Ball>().Launch(newTransform);
+    }
+
+    public void GrowBalls(){
+        //Called from Player powerup, increases size of all balls in level
+    }
+
+    public void ShrinkBalls(){
+        //Called from Player powerup, reduces size of all balls in level
+    }
+
+    public void ChangeBallTypes(){
+        //Called from Player powerup, changed type of all balls to metal or fire
     }
 
     public void DestroyBall(GameObject BallToRemove){
